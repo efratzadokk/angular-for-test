@@ -1,0 +1,55 @@
+<h1>table works!</h1>
+<table mat-table >
+    <ng-container matColumnDef="score">
+        <!-- <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr> -->
+        <!-- <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr> -->
+        <!-- <th mat-header-cell *matHeaderCellDef> Score </th> -->
+        <!-- <td mat-cell >  </td> -->
+    </ng-container>
+
+</table>
+<!-- .slice(0, 20) -->
+
+<div  *ngFor="let item of newArr let index=index" >
+    <div *ngIf="index<20">
+        date: {{keysArr[index]}}
+    <b>מחיר פתיחה</b>:  <b>{{item[0]}}</b>
+
+    
+    <b>מחיר הכי גבוהה</b>:<b>{{item[1]}}</b>
+    <b>מחיר הכי נמוך</b>:<b>{{item[2]}}</b>
+    <b>מחיר סגירה</b>:<b>{{item[3]}}</b>
+    <b>הפרש המחיר</b>:<b>{{hefresh(item[3],item[0])}}</b>
+  
+
+  </div>
+</div>
+
+<h3>היום הכי משתלם לקניה</h3>:<h3>{{keysArr[indMin]}}</h3>
+<h3>במחיר</h3>:<h3>{{min}}</h3>
+<h3>היום הכי משתלם למכירה</h3>:<h3>{{keysArr[indMax]}}</h3>
+<h3>במחיר</h3>:<h3>{{max}}</h3>
+
+<div class="md-form">
+    <input type="search" [(ngModel)]="searchText" placeholder="YYYY-MM-DD Search text">
+  </div>
+  <ul *ngFor="let data of keysArr | filter: searchText">
+    <li>{{data}}</li>
+  </ul>
+
+
+  <div class="searchbox">
+    <input type="search" [(ngModel)]="searchText" placeholder="Search people">
+  </div>
+  <div class="people">
+    <ul>
+      <li *ngFor="let person of peopleList | filter: searchText"
+        [class.selected]="person === selectedPerson"
+        (click)="onSelect(person)">
+        {{person.name}}
+      </li>
+    </ul>
+  </div>
+
+
+
