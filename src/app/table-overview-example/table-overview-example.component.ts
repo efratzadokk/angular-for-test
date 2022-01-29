@@ -5,44 +5,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import { DataService } from '../data.service';
 import { DaysData } from '../models/DaysData';
 
-
-
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
 @Component({
   selector: 'table-overview-example',
   styleUrls: ['./table-overview-example.component.css'],
@@ -51,17 +13,14 @@ const NAMES: string[] = [
 export class TableOverviewExampleComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['date', 'open','high','low','close','hefresh' ];
   dataSource!: MatTableDataSource<DaysData>;
-
-
   ElementsDic: any ;
   keysArr:Array<string>=[];
   newArr:any;
+
   min:any=1000;
   max:any=0;
   indMin:any;
   indMax:any;
-
-
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -72,18 +31,15 @@ export class TableOverviewExampleComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getDataFunc();
-    
+    this.getDataFunc(); 
   }
 
   ngAfterViewInit() {
-
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -111,8 +67,7 @@ export class TableOverviewExampleComponent implements OnInit, AfterViewInit {
     this.keysArr=Object.keys(this.ElementsDic["Time Series (Daily)"])
     let c:DaysData[]=Object.values(this.ElementsDic["Time Series (Daily)"])
     .map((dateDetails:any,index)=>{
-let date = new DaysData()
-
+      let date = new DaysData()
       date.date=this.keysArr[index];
       date.open=this.ElementsDic["Time Series (Daily)"][this.keysArr[index]]["1. open"];
       date.high=this.ElementsDic["Time Series (Daily)"][this.keysArr[index]]["2. high"];
@@ -175,8 +130,6 @@ let date = new DaysData()
         }
       }
     }
-
-    console.log([this.min,this.max,this.indMin,this.indMax])
   }
 
 }
